@@ -12,7 +12,7 @@ export function createApp() {
   app.use(helmet());
   app.use(
     cors({
-      origin: env.clientUrl,
+      origin: env.clientUrls,
       credentials: true,
     })
   );

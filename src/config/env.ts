@@ -11,13 +11,25 @@ function required(name: string): string {
   return value;
 }
 
+const clientUrls = [
+  ...new Set(
+    [
+      ...(process.env.CLIENT_URL || 'http://localhost:3000').split(','),
+      'https://somiti-client.vercel.app',
+    ]
+      .map((url) => url.trim())
+      .filter(Boolean)
+  ),
+];
+
 export const env = {
   port: Number(process.env.PORT) || 5050,
   nodeEnv: process.env.NODE_ENV || 'development',
   mongoUri: required('MONGODB_URI'),
   jwtSecret: required('JWT_SECRET'),
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || '7d',
-  clientUrl: process.env.CLIENT_URL || 'http://localhost:3000',
+  clientUrl: clientUrls[0],
+  clientUrls,
   cookieName: process.env.COOKIE_NAME || 'somiti_token',
   isProd: (process.env.NODE_ENV || 'development') === 'production',
 };
