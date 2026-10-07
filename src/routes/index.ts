@@ -8,6 +8,9 @@ import { branchRoutes } from '../modules/branch/branch.route';
 import { dashboardRoutes } from '../modules/dashboard/dashboard.route';
 import { areaRoutes } from '../modules/area/area.route';
 import { centerRoutes } from '../modules/center/center.route';
+import { memberRoutes } from '../modules/member/member.route';
+import { feeRoutes } from '../modules/fee/fee.route';
+import { uploadRoutes } from '../modules/upload/upload.route';
 
 export const router = Router();
 
@@ -33,4 +36,7 @@ router.use('/somitis', somitiRoutes);
 router.use('/branches', branchRoutes);
 router.use('/areas', areaRoutes);
 router.use('/centers', centerRoutes);
+router.use('/members', memberRoutes);
+router.use('/fees', feeRoutes);
+router.use('/uploads', uploadRoutes);
 router.use('/dashboard', dashboardRoutes);

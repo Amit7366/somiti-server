@@ -32,4 +32,7 @@ export const env = {
   clientUrls,
   cookieName: process.env.COOKIE_NAME || 'somiti_token',
   isProd: (process.env.NODE_ENV || 'development') === 'production',
+  /** ImageLab secret — Dashboard → API keys. Never expose to the client. */
+  imageLabApiKey: process.env.IMAGELAB_API_KEY || '',
+  imageLabApiUrl: (process.env.IMAGELAB_API_URL || 'https://api.imagelab.site').replace(/\/$/, ''),
 };

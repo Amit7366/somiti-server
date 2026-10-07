@@ -11,13 +11,20 @@ export function errorHandler(
   res: Response,
   _next: NextFunction
 ): void {
-  const apiError = err as ApiError & { code?: number };
+  const apiError = err as ApiError & { code?: number | string; name?: string };
   let statusCode = apiError.statusCode || 500;
   let message = err.message || 'Internal server error';
 
   if (apiError.code === 11000) {
     statusCode = 409;
     message = 'A record with this unique value already exists';
+  }
+
+  if (apiError.name === 'MulterError') {
+    statusCode = 400;
+    if (apiError.code === 'LIMIT_FILE_SIZE') {
+      message = 'File too large (max 5MB)';
+    }
   }
 
   if (statusCode === 500 && process.env.NODE_ENV === 'production') {
